@@ -1,2 +1,3 @@
 # memory-game
- Simple implementation of memory game in JavaScript
+
+Simple implementation of a memory game in JavaScript
