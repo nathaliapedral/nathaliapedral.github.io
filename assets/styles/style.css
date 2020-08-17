@@ -6,6 +6,11 @@
 
 body {
     font-family: 'Alata', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: whitesmoke;
 }
 
 .card {
@@ -55,10 +60,11 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
     color: whitesmoke;
     font-size: 50px;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 #restart {
@@ -69,4 +75,12 @@ body {
     border-radius: 10px;
     background-color: rgb(59, 165, 156);
     color: whitesmoke;
+}
+
+#board {
+
+    max-width: 700px;
+    display: grid;
+    grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
+    gap: 10px;
 }
