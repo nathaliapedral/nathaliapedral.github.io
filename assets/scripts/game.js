@@ -13,7 +13,57 @@ let game = {
         'react'
     ],
 
+    lockMode: false,
+
+    firstCard: null,
+    secondCard: null,
+
     cards: null,
+
+    checkMatch: function () {
+        if (this.secondCard) {
+            return this.firstCard.icon === this.secondCard.icon;
+        } else {
+            return false;
+        }
+    },
+
+    checkGameOver: function () {
+        return this.cards.length === this.cards.filter(card => card.isFlipped).length;
+    },
+
+    clearCards: function () {
+        this.lockMode = false;
+        this.firstCard = null;
+        this.secondCard = null;
+    },
+
+    setCard: function (id) {
+
+        let card = this.cards.filter(card => card.id === id)[0];
+
+        if (card.isFlipped || this.lockMode) {
+            return false;
+        }
+
+        if (!this.firstCard) {
+            this.firstCard = card;
+            this.firstCard.isFlipped = true;
+            return true;
+        } else {
+            this.secondCard = card;
+            this.secondCard.isFlipped = true;
+            this.lockMode = true;
+            return true;
+        }
+
+    },
+
+    unflipCards: function () {
+        this.firstCard.isFlipped = false;
+        this.secondCard.isFlipped = false;
+        this.clearCards();
+    },
 
     createCardsFromTechs: function () {
 

@@ -1,6 +1,7 @@
 const BACK = "card-back";
 const FRONT = "card-front";
-const CARD = "card"
+const CARD = "card";
+const FLIP = "flip";
 
 
 
@@ -36,8 +37,38 @@ function createCardContent(card, cardElement) {
 }
 
 function flipCard() {
-    this.classList.add("flip");
+
+    if (game.setCard(this.id)) {
+        this.classList.add("flip");
+        if (game.secondCard) {
+            if (game.checkMatch()) {
+                game.clearCards();
+                if (game.checkGameOver()) {
+                    setTimeout(() => {
+                        createGameOver();
+                    }, 500);
+                }
+            } else {
+                setTimeout(() => {
+                    let firstCardView = document.getElementById(game.firstCard.id);
+                    let secondCardView = document.getElementById(game.secondCard.id);
+
+                    firstCardView.classList.remove(FLIP);
+                    secondCardView.classList.remove(FLIP);
+                    game.unflipCards();
+                }, 1000);
+            }
+        }
+    }
 }
+
+
+function createGameOver() {
+    let gameOver = document.getElementById("game-over");
+    gameOver.style.display = "flex";
+}
+
+
 
 
 function createCardFace(cardFaceClass, card, parentElement) {
